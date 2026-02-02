@@ -1,39 +1,157 @@
 {
-    "compartments_configuration" : {
-        "compartments" : {
-            "NETWORK-CMP" : {
-                "name" : "orchestrator-network-cmp",
-                "description" : "Sample IAM compartment created by OCI Landing Zones Orchestrator."
-            }      
-        }
-    },
-    "groups_configuration" : {
-        "groups" : {
-            "NETWORK-GROUP" : {
-                "name" : "orchestrator-network-admin-grp",
-                "description" : "Sample IAM group created by OCI Landing Zones Orchestrator."
+  "compartments_configuration": {
+    "default_parent_id": "ocid1.tenancy.oc21..aaaaaaaankln5mhficdkuyjrzircojjvy5up7ocmqveqrjzp26qqzslca6ka",
+    "compartments": {
+      "lz-shared": {
+        "name": "cmp-mom-landingzone-p",
+        "description": "top-level landing zone shared compartment",
+        "children": {
+          "lz-network": {
+            "name": "cmp-mom-network",
+            "description": "shared networking compartment"
+          },
+          "lz-security": {
+            "name": "cmp-mom-security",
+            "description": "shared security services compartment"
+          },
+          "lz-platform": {
+            "name": "cmp-mom-platform",
+            "description": "shared platform services compartment",
+            "children": {
+              "platform-ebs": {
+                "name": "cmp-mom-platform-ebscm",
+                "description": "platform ebs compartment"
+              }
             }
+          },
+          "lz-prod": {
+            "name": "cmp-mom-prod",
+            "description": "production environment",
+            "children": {
+              "prod-network": {
+                "name": "cmp-mom-p-network",
+                "description": "production networking"
+              },
+              "prod-security": {
+                "name": "cmp-mom-p-security",
+                "description": "production security services"
+              },
+              "prod-platform": {
+                "name": "cmp-mom-p-platform",
+                "description": "production shared platforms",
+                "children": {
+                  "prod-platform-ebs-mom": {
+                    "name": "cmp-mom-p-platform-ebs-mom",
+                    "description": "production ebs platform - mom"
+                  },
+                  "prod-platform-ebs-parre": {
+                    "name": "cmp-mom-p-platform-ebs-parre",
+                    "description": "production ebs platform - parre"
+                  }
+                }
+              },
+              "prod-projects": {
+                "name": "cmp-mom-p-projects",
+                "description": "production projects compartment",
+                "children": {
+                  "prod-apex": {
+                    "name": "cmp-mom-p-apex",
+                    "description": "production apex workloads"
+                  },
+                  "prod-proj1": {
+                    "name": "cmp-mom-p-proj1",
+                    "description": "production project placeholder"
+                  }
+                }
+              }
+            }
+          },
+          "lz-test": {
+            "name": "cmp-mom-test",
+            "description": "test / uat environment",
+            "children": {
+              "test-network": {
+                "name": "cmp-mom-t-network",
+                "description": "test networking"
+              },
+              "test-security": {
+                "name": "cmp-mom-t-security",
+                "description": "test security services"
+              },
+              "test-platform": {
+                "name": "cmp-mom-t-platform",
+                "description": "test shared platforms",
+                "children": {
+                  "test-platform-ebs-mom": {
+                    "name": "cmp-mom-t-platform-ebs-mom",
+                    "description": "test ebs platform - mom"
+                  },
+                  "test-platform-ebs-parre": {
+                    "name": "cmp-mom-t-platform-ebs-parre",
+                    "description": "test ebs platform - parre"
+                  }
+                }
+              },
+              "test-projects": {
+                "name": "cmp-mom-t-projects",
+                "description": "test projects",
+                "children": {
+                  "test-apex": {
+                    "name": "cmp-mom-t-apex",
+                    "description": "test apex workloads"
+                  },
+                  "test-proj1": {
+                    "name": "cmp-mom-t-proj1",
+                    "description": "test project placeholder"
+                  }
+                }
+              }
+            }
+          },
+          "lz-dev": {
+            "name": "cmp-mom-dev",
+            "description": "development environment",
+            "children": {
+              "dev-network": {
+                "name": "cmp-mom-d-network",
+                "description": "development networking"
+              },
+              "dev-security": {
+                "name": "cmp-mom-d-security",
+                "description": "development security services"
+              },
+              "dev-platform": {
+                "name": "cmp-mom-d-platform",
+                "description": "development shared platforms",
+                "children": {
+                  "dev-platform-ebs-mom": {
+                    "name": "cmp-mom-d-platform-ebs-mom",
+                    "description": "dev ebs platform - mom"
+                  },
+                  "dev-platform-ebs-parre": {
+                    "name": "cmp-mom-d-platform-ebs-parre",
+                    "description": "dev ebs platform - parre"
+                  }
+                }
+              },
+              "dev-projects": {
+                "name": "cmp-mom-d-projects",
+                "description": "development projects",
+                "children": {
+                  "dev-apex": {
+                    "name": "cmp-mom-d-apex",
+                    "description": "dev apex workloads"
+                  },
+                  "dev-proj1": {
+                    "name": "cmp-mom-d-proj1",
+                    "description": "dev project placeholder"
+                  }
+                }
+              }
+            }
+          }
         }
-    },
-    "policies_configuration" : {
-        "supplied_policies" : {
-            "NETWORK-POLICY" : {
-                "name" : "orchestrator-network-admin-policy",
-                "description" : "Sample IAM policy created by OCI Landing Zones Orchestrator.",
-                "compartment_id" : "TENANCY-ROOT",
-                "statements" : [
-                  "allow group orchestrator-network-admin-grp to manage virtual-network-family in compartment orchestrator-network-cmp",
-                  "allow group orchestrator-network-admin-grp to manage drgs in compartment orchestrator-network-cmp",
-                  "allow group orchestrator-network-admin-grp to manage load-balancers in compartment orchestrator-network-cmp",
-                  "allow group orchestrator-network-admin-grp to manage instance-family in compartment orchestrator-network-cmp",
-                  "allow group orchestrator-network-admin-grp to manage instance-agent-plugins in compartment orchestrator-network-cmp",
-                  "allow group orchestrator-network-admin-grp to manage volume-family in compartment orchestrator-network-cmp",
-                  "allow group orchestrator-network-admin-grp to manage file-family in compartment orchestrator-network-cmp",
-                  "allow group orchestrator-network-admin-grp to manage keys in compartment orchestrator-network-cmp",
-                  "allow group orchestrator-network-admin-grp to manage secret-family in compartment orchestrator-network-cmp",
-                  "allow group orchestrator-network-admin-grp to use key-delegate in compartment orchestrator-network-cmp"
-                ]            
-            }   
-        }
-    }             
+      }
+    }
+  }
 }
